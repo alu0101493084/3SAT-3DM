@@ -13,11 +13,9 @@ struct Clausule {
 class ThreeSAT {
 public:
     // Read json from file
-    ThreeSAT(const std::string& json_file_name) {
-    }
+    ThreeSAT(const std::string& json_file_name);
 
-    ~ThreeSAT() {
-    }
+    ~ThreeSAT();
 
 private:
     int variable_amount; // Variables are integers in [ 0 , variable_amount-1 ]
