@@ -1,6 +1,9 @@
-#include <cstdio>
+#include <iostream>
+
+#include "ThreeSAT.hpp"
 
 int main (int argc, char *argv[]) {
-    puts("hi");
+    ThreeSAT three_sat("3sat.json");
+    std::cout << three_sat;
     return 0;
 }
