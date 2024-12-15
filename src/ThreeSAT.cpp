@@ -1,10 +1,10 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include <json/json.h>
 #include <string>
 
-#include "ThreeSAT.hpp"
+#include "../include/json.h"
+#include "../include/ThreeSAT.hpp"
 
 ThreeSAT::ThreeSAT(const std::string& json_file_name) {
     std::ifstream input_stream(json_file_name, std::ifstream::binary);
