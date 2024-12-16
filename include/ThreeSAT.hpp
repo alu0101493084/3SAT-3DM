@@ -11,7 +11,7 @@ struct Clause {
 };
 
 class ThreeSAT {
-public:
+ public:
     ThreeSAT(const std::string& json_file_name);        // Read json from file
     const std::vector<Clause>& get_clauses() const;     // Get clauses
 
@@ -20,7 +20,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const ThreeSAT& t_sat);
 
-private:
+ private:
     int variable_amount;            // Variables are integers in [ 0 , variable_amount-1 ]
     std::vector<Clause> clauses;
 };
