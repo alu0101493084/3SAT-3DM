@@ -38,6 +38,10 @@ int ThreeSAT::get_variable_amount() const {
     return variable_amount;
 }
 
+int ThreeSAT::get_clause_amount() const {
+    return clauses.size();
+}
+
 std::ostream& operator<<(std::ostream& out, const ThreeSAT& t_sat) {
     out << "Variable amount: " << t_sat.variable_amount;
     for (Clause c : t_sat.clauses) {
