@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
@@ -14,10 +16,8 @@ class ThreeSAT {
  public:
     ThreeSAT(const std::string& json_file_name);        // Read json from file
     const std::vector<Clause>& get_clauses() const;     // Get clauses
-
     int get_variable_amount() const;                    // Get amount of variables
-    int get_clause_amount() const;                      // Get amount of clauses
-
+    int get_clause_amount() const;                      // Get amount of clauses¡
     friend std::ostream& operator<<(std::ostream& out, const ThreeSAT& t_sat);
 
  private:
