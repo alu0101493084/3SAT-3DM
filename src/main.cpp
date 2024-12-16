@@ -7,8 +7,7 @@
 int main (int argc, char *argv[]) {
     ReductionThreeDM problem_reduction;
     ThreeSAT three_sat("3sat.json");
-    ThreeDM three_dm(2);
-    problem_reduction.reduce(three_sat);
-    std::cout << three_sat << std::endl;
+    ThreeDM three_dm = problem_reduction.reduce(three_sat);
+    std::cout << three_dm << std::endl;
     return 0;
 }

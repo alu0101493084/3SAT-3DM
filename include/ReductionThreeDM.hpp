@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ThreeSAT.hpp"
 #include "ThreeDM.hpp"
 

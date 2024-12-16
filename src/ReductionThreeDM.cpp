@@ -10,18 +10,45 @@ ThreeDM ReductionThreeDM::reduce(const ThreeSAT& t_sat) {
     ThreeDM t_dm(group_size);
     std::vector<Matching> matchings;
 
+    // Truth setting and fan-out
+    for (int star = 0; star < t_sat.get_variable_amount(); ++star) {
+        int star_index = star * 2 * t_sat.get_clause_amount();
+        for (int c = 0; c < t_sat.get_clause_amount(); ++c) {
+            int index = star_index + c * 2;
+            
+            Matching matching = {index, index/2, index/2}; // Triangulo true
+            matchings.push_back(matching);
+            if (c == t_sat.get_clause_amount() - 1) {
+                matching = {index + 1, index/2, star_index / 2}; // Triangulo false
+                matchings.push_back(matching);
+            }
+            matching = {index + 1, index/2, index/2 + 1}; // Triangulo false
+            matchings.push_back(matching);
+        }
+    }
+
+    /*
+    // Truth Setting: Crear estrellas para cada variable
+    for (int var = 0; var < t_sat.get_variable_amount(); var++) {
+        int start_index = var * 2 * t_sat.get_clause_amount();
+
+        // Para cada clausula, creamos los picos (spikes) y conexiones internas
+        for (int clause = 0; clause < t_sat.get_clause_amount(); clause++) {
+            int true_path = start_index + clause * 2;       // Camino True
+                            
+            int false_path = start_index + clause * 2 + 1;  // Camino False
+
+            // Crear tripletas que conectan los nodos internos ciclicamente
+            matchings.push_back({true_path, true_path + 1, false_path});  // Ejemplo conexion True
+            matchings.push_back({false_path, true_path, false_path + 1});  // Ejemplo conexion False
+        }
+    }
+    
+    */
+
     // Starting indexes of elements for each component
     const int element_st = t_sat.get_variable_amount() * t_sat.get_clause_amount();
     const int element_gc = element_st + t_sat.get_clause_amount();
-
-    // Truth setting and fan-out
-    int a_index = 0;
-    int b_index = 0;
-    for (int star = 0; star < t_sat.get_variable_amount(); star++) {
-        for (int spike = 0; spike < 2 * t_sat.get_clause_amount(); spike++) {
-            
-        }
-    }
 
     // Satisfactory testing
     for (int c = 0; c < t_sat.get_clause_amount(); c++) {
