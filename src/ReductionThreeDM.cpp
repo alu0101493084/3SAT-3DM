@@ -21,9 +21,10 @@ ThreeDM ReductionThreeDM::reduce(const ThreeSAT& t_sat) {
             if (c == t_sat.get_clause_amount() - 1) {
                 matching = {index + 1, index/2, star_index / 2}; // Triangulo false
                 matchings.push_back(matching);
+            } else {
+                matching = {index + 1, index/2, index/2 + 1}; // Triangulo false
+                matchings.push_back(matching);
             }
-            matching = {index + 1, index/2, index/2 + 1}; // Triangulo false
-            matchings.push_back(matching);
         }
     }
 
@@ -43,13 +44,13 @@ ThreeDM ReductionThreeDM::reduce(const ThreeSAT& t_sat) {
     }
 
     // Garbage collector
-    const int gc_size = 2 * t_sat.get_clause_amount() * (t_sat.get_variable_amount() - 1);
+    const int gc_size = t_sat.get_clause_amount() * (t_sat.get_variable_amount() - 1);
     for (int gc = 0; gc < gc_size; gc++) {
         for (int spike = 0; spike < group_size; spike++) {
             Matching m = {spike, element_gc + gc, element_gc + gc};
             matchings.push_back(m);
         }
     }
-
+    t_dm.setMatchings(matchings);  
     return t_dm;
 }

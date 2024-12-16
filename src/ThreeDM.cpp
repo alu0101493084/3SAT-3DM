@@ -4,26 +4,33 @@ ThreeDM::ThreeDM(int group_size) {
     this->group_size = group_size;
 }
 
-std::ostream& operator<<(std::ostream& out, const ThreeDM& t_dm) {
+void ThreeDM::to_json() {
+    std::ofstream archivo_json{"3dm.json", std::ios_base::out};
+    archivo_json << '{' << std::endl;
+    archivo_json << "\t\"size\": " << group_size << ',' << std::endl;
+    archivo_json << "\t\"matchings\": [" << std::endl;
+    for (size_t m = 0; m < matchings.size(); m++) {
+        Matching matching = matchings[m];
+        archivo_json << "\t\t{" << std::endl;
+        archivo_json << "\t\t\t\"w\": " << matching.w << ',' << std::endl;
+        archivo_json << "\t\t\t\"x\": " << matching.x << ',' << std::endl;
+        archivo_json << "\t\t\t\"y\": " << matching.y << std::endl;
+        if (m == matchings.size() - 1) {
+            archivo_json << "\t\t}" << std::endl;
+        } else {
+            archivo_json << "\t\t}," << std::endl;
+        }
+    }
+    archivo_json << "\t]" << std::endl << '}';
+}
+
+void ThreeDM::Print(const ThreeDM& t_dm) {
     std::cout << "SETS\n\n";
-    std::cout << "W { ";
-    for (int i = 0; i < t_dm.group_size - 1; i++) {
-        std::cout << t_dm.matchings[i].w << ", ";
-    }
-    std::cout << t_dm.matchings[t_dm.matchings.size() - 1].w << " }\n\n";
-    std::cout << "X { ";
-    for (int i = 0; i < t_dm.group_size - 1; i++) {
-        std::cout << t_dm.matchings[i].x << ", ";
-    }
-    std::cout << t_dm.matchings[t_dm.matchings.size() - 1].x << " }\n\n";
-    std::cout << "Y { ";
-    for (int i = 0; i < t_dm.group_size - 1; i++) {
-        std::cout << t_dm.matchings[i].y << ", ";
-    }
     std::cout << t_dm.matchings[t_dm.matchings.size() - 1].y << " }\n\n";
     std::cout << "M {\n";
-    for (int i = 0; i < t_dm.group_size - 1; i++) {
-        std::cout << "(" << t_dm.matchings[i].w << ", " << t_dm.matchings[i].x << ", " << t_dm.matchings[i].y << "),\n";
+    for (size_t l = 0; l < (t_dm.matchings.size() - 1); ++l) {
+        std::cout << "(" << t_dm.matchings[l].w << ", " << t_dm.matchings[l].x << ", " << t_dm.matchings[l].y << "),\n";
     }
-    std::cout << "(" << t_dm.matchings[t_dm.matchings.size() - 1].w << ", " << t_dm.matchings[t_dm.matchings.size() - 1].x << ", " << t_dm.matchings[t_dm.matchings.size() - 1].y << ")\n}";
+    std::cout << "(" << t_dm.matchings[t_dm.matchings.size() - 1].w << ", " << t_dm.matchings[t_dm.matchings.size() - 1].x << ", " << t_dm.matchings[t_dm.matchings.size() - 1].y << ")\n}\n";
+    std::cout << t_dm.matchings.size() << std::endl;
 }

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 struct Matching {
     int w;
@@ -12,7 +13,9 @@ struct Matching {
 class ThreeDM {
  public:
     ThreeDM(int group_size);
-    friend std::ostream& operator<<(std::ostream& out, const ThreeDM& t_dm);
+    void setMatchings(const std::vector<Matching>& matchings_parameter) { matchings = matchings_parameter; }
+    void to_json();
+    void Print(const ThreeDM& t_dm);
 
  private:
     int group_size;
