@@ -24,7 +24,7 @@ ThreeSAT::ThreeSAT(const std::string& json_file_name) {
         // set literal values
         for (int l = 0; l < 3; l++) {
             clauses[c].literals[l].variable = std::stoi(var_names[l]);
-            clauses[c].literals[l].negated = json_clauses[c][var_names[l]].asInt();
+            clauses[c].literals[l].value = !json_clauses[c][var_names[l]].asInt();
         }
 
     }
@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& out, const ThreeSAT& t_sat) {
         out << "\n{";
         for (Literal l : c.literals) {
             out << ' ';
-            if (l.negated) out << '-';
+            if (!l.value) out << '-';
             out << l.variable << ' ';
         }
         out << '}';

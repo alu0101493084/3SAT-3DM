@@ -3,7 +3,7 @@
 
 struct Literal {
     int variable;
-    bool negated;
+    bool value;
 };
 
 struct Clause {
